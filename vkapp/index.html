@@ -4,52 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HomeWork #8 -- VK.api showMyFriends</title>
+    <title>
+        HomeWork #11 -- VK.api MVC pattern
+    </title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <!-- Custom styles -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
 
-    <section class="header">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <h1 id="headerUserFriendsVK">
-                    <!-- header content insert here -->
-                </h1>
-            </div>
+    <!-- Main container -->
+    <div class="container">
+
+        <!-- Header insert here -->
+        <div id="header"></div>
+
+        <!-- Routing buttons -->
+        <div class="btn-group btn-group-lg">
+            <button type="button" class="btn btn-default" onclick="Router.handle('music')">Музыка</button>
+            <button type="button" class="btn btn-default" onclick="Router.handle('friends')">Друзья</button>
+            <button type="button" class="btn btn-default" onclick="Router.handle('news')">Новости</button>
+            <button type="button" class="btn btn-default" onclick="Router.handle('groups')">Группы</button>
         </div>
-    </section>
 
-<!--     <section class="workspace">
-        <div class="row" >
-            <div class="col-md-12">
-                <!~~ Handlebars injection here ~~>
-                <ul id="listOfDownloadedFriends">
+        <hr>
+        <!-- Results insert here -->
+        <div id="results"></div>
 
-                </ul>
-            </div>
-        </div>
-    </section> -->
+    </div>
+    <!-- Main container -->
 
-    <section class="workspace">
-        <div class="row" >
-            <div class="col-md-5 col-md-offset-1">
-                <!-- Handlebars injection here -->
-                <div class="" id="listOfDownloadedFriends">
+    <!-- Handlebars templates -->
 
+    <script type="text/x-handlebars-template" id="headerTemplate">
+        <h1>Данные из VK-аккаунта: {{first_name}} {{last_name}}</h1>
+    </script>
+
+    <script type="text/x-handlebars-template" id="musicTemplate">
+        <ul class="list-group" id="audioList">
+            {{#each list}}
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-10">
+                        <span class="title">{{{artist}}} - {{{title}}}</span>
+                    </div>
+                    <div class="col-xs-2 text-right">{{formatTime duration}}</div>
                 </div>
-            </div>
-            <div class="col-md-6">
+            </li>
+            {{/each}}
+        </ul>
+    </script>
 
+    <script type="text/x-handlebars-template" id="friendsTemplate">
+        <div id="friendsList">
+            {{#each list}}
+            <div class="friend text-center">
+                <img src="{{photo_100}}" class="img-circle">
+                <div>{{first_name}}<br>{{last_name}}</div>
             </div>
+            {{/each}}
         </div>
-    </section>
+    </script>
 
-    <!-- HandlebarsJS Template -->
+    <script type="text/x-handlebars-template" id="groupsTemplate">
+        <div id="friendsList">
+            {{#each list}}
+            <div class="friend text-center">
+                <img src="{{photo_100}}" class="img-circle">
+                <div>{{name}}</div>
+            </div>
+            {{/each}}
+        </div>
+    </script>
+
+    <script type="text/x-handlebars-template" id="newsTemplate">
+        <div class="news">
+            {{#each list}}
+            {{#if text}}
+            <div class="post">
+                <b>{{formatDate date}}</b>
+                <div class="post-text">{{{text}}}</div>
+            </div>
+            <hr>
+            {{/if}}
+            {{/each}}
+        </div>
+    </script>
+    <!-- Handlebars templates -->
+
+<!--     <!~~ HandlebarsJS Template ~~>
     <script type="text/x-handlebars-template" id="allRenderedFriends">
         {{#each friendslist}}
             <div class="row friend_block__design">
@@ -71,12 +117,17 @@
                 </div>
             </div>
         {{/each}}
-    </script>
+    </script> -->
 
     <script type"text/javascript" src="https://vk.com/js/api/openapi.js"></script>
     <!-- HandlebarsJS -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js"></script>
     <!-- CustomJS -->
-    <script type="text/javascript" src="script.js"></script>
+    <!-- <script type="text/javascript" src="script.js"></script> -->
+    <script src="script/model.js"></script>
+    <script src="script/view.js"></script>
+    <script src="script/controller.js"></script>
+    <script src="script/router.js"></script>
+    <script src="script/entry.js"></script>
 </body>
 </html>

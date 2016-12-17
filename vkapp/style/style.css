@@ -1,6 +1,12 @@
 /*
 CSS styles for test task
 */
+
+.friend {
+    float: left;
+    margin: 15px;
+}
+
 .friend_block__design {
     background-color: #eff5ff;
     border: 0.1rem solid #5a5c60;
