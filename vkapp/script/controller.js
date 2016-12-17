@@ -14,6 +14,12 @@ var Controller = {
             results.innerHTML = View.render('groups', {list: groups.items});
         });
     },
+    photosRoute: function() {
+        return Model.getPhotos().then(function(photos) {
+            console.log(photos);
+            results.innerHTML = View.render('photos', {list: photos.items});
+        });
+    },
     newsRoute: function() {
         return Model.getNews().then(function(news) {
             results.innerHTML = View.render('news', {list: news.items});

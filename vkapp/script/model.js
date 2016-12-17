@@ -37,6 +37,9 @@ var Model = {
     getGroups: function() {
         return this.callApi('groups.get', { v: settingsVK.apiVersion, extended:1 });
     },
+    getPhotos: function() {
+        return this.callApi('photos.get', { v: settingsVK.apiVersion, extended:1, album_id:'wall' });
+    },
     getNews: function() {
         return this.callApi('newsfeed.get', { filters: 'post', count: 20 });
     }

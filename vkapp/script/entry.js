@@ -10,10 +10,12 @@
 // 3) http://localhost:7777/
 // =============================================================================
 
+// Настроечные параметры
 let settingsVK = {
     appID: 5757533,
     apiVersion: '5.60',
     VK_ACCESS_FRIENDS: 2,
+    VK_ACCESS_PHOTOS: 4,
     VK_ACCESS_AUDIO: 8,
     VK_ACCESS_WALL: 8192,
     VK_ACCESS_GROUPS: 262144
@@ -39,6 +41,8 @@ new Promise(function(resolve) {
     return Model.login(
         settingsVK.appID,
         settingsVK.VK_ACCESS_FRIENDS
+        |
+        settingsVK.VK_ACCESS_PHOTOS
         |
         settingsVK.VK_ACCESS_AUDIO
         |
