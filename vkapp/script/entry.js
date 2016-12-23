@@ -53,6 +53,7 @@ new Promise(function(resolve) {
 }).then(function() {
     return Model.getUser().then(function(users) {
         header.innerHTML = View.render('header', users[0]);
+        console.log('USER is', users[0]);
     });
 }).catch(function(e) {
     console.error(e);

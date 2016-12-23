@@ -40,6 +40,14 @@ var Model = {
     getPhotos: function() {
         return this.callApi('photos.get', { v: settingsVK.apiVersion, extended:1, album_id:'wall' });
     },
+    getPhotosComments: function( ownerID, photosID ) {
+        return this.callApi('photos.getComments', {
+            v: settingsVK.apiVersion,
+            extended:1,
+            owner_id: ownerID,
+            photo_id: photosID
+        });
+    },
     getNews: function() {
         return this.callApi('newsfeed.get', { filters: 'post', count: 20 });
     }
