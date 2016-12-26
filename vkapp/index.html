@@ -92,11 +92,30 @@
                     <i class="fa fa-heart" aria-hidden="true"></i>: {{likes.count}} / <i class="fa fa-comments" aria-hidden="true"></i>: {{comments.count}} / <i class="fa fa-share-alt" aria-hidden="true"></i>: {{reposts.count}}
                 </div>
                 <div class="text-center">
+                    {{#if customComments}}
                     <ul>
-                        {{#each list.customComments}}
-                            <li></li>
-                        {{/each}}
+                            <li>
+                                <!-- <div>
+
+                                </div> -->
+
+                                {{#each customComments}}
+                                    Пользователь:
+                                    <img src="{{profiles.photo_50}}" class="img-circle">
+                                    <div>
+                                        {{profiles.last_name}} {{profiles.first_name}}
+                                    </div>
+                                {{/each}}
+
+                                {{#each customComments.items}}
+                                    <div>
+                                        Комментарий:
+                                        {{ text }}
+                                    </div>
+                                {{/each}}
+                            </li>
                     </ul>
+                    {{/if}}
                 </div>
                 <hr>
             </div>

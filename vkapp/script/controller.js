@@ -15,48 +15,41 @@ var Controller = {
         });
     },
     photosRoute: function() {
-        return Model.getPhotos().then(
-
-
-
-
-
-            // TODO избавиться от callback-hell сделать через цепочку промисов
+        Model.getPhotos().then(
             function(photos) {
-
                 // очередь запросов к VK api
                 function queueRequests(curr, max) {
                     if (curr >= max) return;
-                    Model.getPhotosComments( photos.items[curr].owner_id, photos.items[curr].id ).then(
+                    Model.getPhotosComments( photos.items[curr].owner_id, photos.items[curr].id )
+                    .then(
                         function(comments) {
                             var res = JSON.stringify(comments);
                             var obj = JSON.parse(res);
-                            console.log(obj);
                             if ( obj.count > 0 ) {
                                 photos.items[curr].customComments = obj;
-                                console.log('photos.items[curr]', photos.items[curr]);
+                                for (let i=0; i<photos.items[curr].customComments.items.length; i++) {
+                                    //TODO написать функционал выборки и добавления данных автора по его id из профиля в комментарий
+                                    console.log('photos '+i, photos.items[curr].customComments.items[i]);
+                                }
                             }
+
+                            // рекурсивный вызов и
                             // установка задержки в 1/3 секунды, чтоб ВК не забанил
-                            // рекурсивный вызов
                             setTimeout(
                                 function() { queueRequests(curr+1, max) } , 333
                             );
                         }
                     );
+
+                    //HACK каждый раз перстраиваем dom дерево? 
+                    results.innerHTML = View.render('photos', {list: photos.items});
+
                 };
                 // queueRequests
 
                 queueRequests(0, photos.items.length);
-
-
-
         })
-        .then(
-            function(customPhotos) {
-                results.innerHTML = View.render('photos', {list: customPhotos.items});
 
-            }
-        )
         ;
     },
     newsRoute: function() {
